@@ -1,0 +1,503 @@
+Sending build context to Docker daemon  340.7MB
+Step 1/19 : FROM rustlang/rust:nightly
+ ---> 330a6b7d0d2a
+Step 2/19 : RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install     -y build-essential cmake git libgmp3-dev libprocps-dev libboost-all-dev libssl-dev nano wget curl
+ ---> Using cache
+ ---> 751959687d6f
+Step 3/19 : ENV NODE_VERSION=16.13.0
+ ---> Using cache
+ ---> a9bf4a17edcc
+Step 4/19 : RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+ ---> Using cache
+ ---> 33e47137ba7a
+Step 5/19 : ENV NVM_DIR=/root/.nvm
+ ---> Using cache
+ ---> 2e858738efba
+Step 6/19 : RUN . "$NVM_DIR/nvm.sh" && nvm install ${NODE_VERSION}
+ ---> Using cache
+ ---> e458ec17fdd9
+Step 7/19 : RUN . "$NVM_DIR/nvm.sh" && nvm use v${NODE_VERSION}
+ ---> Using cache
+ ---> 25f34089bbd5
+Step 8/19 : RUN . "$NVM_DIR/nvm.sh" && nvm alias default v${NODE_VERSION}
+ ---> Using cache
+ ---> c9234ba1f99f
+Step 9/19 : ENV PATH="/root/.nvm/versions/node/v${NODE_VERSION}/bin/:${PATH}"
+ ---> Using cache
+ ---> 095517fe275c
+Step 10/19 : RUN node --version
+ ---> Using cache
+ ---> ff72e5a6432c
+Step 11/19 : RUN npm --version
+ ---> Using cache
+ ---> 2b0968e6e1b9
+Step 12/19 : RUN npm install -g npm
+ ---> Using cache
+ ---> 1ced97bdb48f
+Step 13/19 : RUN mkdir test
+ ---> Using cache
+ ---> f533caf3e8e4
+Step 14/19 : WORKDIR test
+ ---> Using cache
+ ---> 88693467e0b6
+Step 15/19 : RUN npm install r1csfile
+ ---> Using cache
+ ---> 68ab40ac56a3
+Step 16/19 : COPY read.js ./
+ ---> Using cache
+ ---> 9ce872d7cca2
+Step 17/19 : COPY matmul.r1cs ./
+ ---> Using cache
+ ---> 834a11793a6d
+Step 18/19 : COPY out.r1cs ./
+ ---> Using cache
+ ---> 83d01ee5d864
+Step 19/19 : RUN node read.js
+ ---> Running in b9fe2fc44d05
+{
+  n8: 32,
+  prime: 21888242871839275222246405745257275088548364400416034343698204186575808495617n,
+  curve: {
+    q: 21888242871839275222246405745257275088696311157297823662689037894645226208583n,
+    r: 21888242871839275222246405745257275088548364400416034343698204186575808495617n,
+    name: 'bn128',
+    tm: ThreadManager {
+      actionQueue: [],
+      oldPFree: 0,
+      memory: Memory [WebAssembly.Memory] {},
+      u8: [Uint8Array],
+      u32: [Uint32Array],
+      instance: Instance [WebAssembly.Instance] {},
+      singleThread: false,
+      initalPFree: 84976,
+      pq: 488,
+      pr: 1768,
+      pG1gen: 31432,
+      pG1zero: 31528,
+      pG2gen: 31624,
+      pG2zero: 31816,
+      pOneT: 32008,
+      workers: [Array],
+      pendingDeferreds: [Array],
+      working: [Array],
+      concurrency: 64
+    },
+    prePSize: 192,
+    preQSize: 19776,
+    Fr: WasmField1 {
+      tm: [ThreadManager],
+      prefix: 'frm',
+      p: 21888242871839275222246405745257275088548364400416034343698204186575808495617n,
+      n8: 32,
+      type: 'F1',
+      m: 1,
+      half: 10944121435919637611123202872628637544274182200208017171849102093287904247808n,
+      bitLength: 254,
+      mask: 28948022309329048855892746252171976963317496166410141009864396001978282409983n,
+      pOp1: 84976,
+      pOp2: 85008,
+      pOp3: 85040,
+      zero: [Uint8Array],
+      one: [Uint8Array],
+      negone: [Uint8Array],
+      two: [Uint8Array],
+      n64: 4,
+      n32: 8,
+      nqr: [Uint8Array],
+      shift: [Uint8Array],
+      shiftInv: [Uint8Array],
+      s: 28,
+      w: [Array],
+      batchToMontgomery: [AsyncFunction: batchConvert],
+      batchFromMontgomery: [AsyncFunction: batchConvert],
+      batchApplyKey: [AsyncFunction (anonymous)],
+      fft: [AsyncFunction (anonymous)],
+      ifft: [AsyncFunction (anonymous)],
+      lagrangeEvaluations: [AsyncFunction (anonymous)],
+      fftMix: [AsyncFunction: fftMix],
+      fftJoin: [AsyncFunction: fftJoin],
+      fftFinal: [AsyncFunction: fftFinal]
+    },
+    F1: WasmField1 {
+      tm: [ThreadManager],
+      prefix: 'f1m',
+      p: 21888242871839275222246405745257275088696311157297823662689037894645226208583n,
+      n8: 32,
+      type: 'F1',
+      m: 1,
+      half: 10944121435919637611123202872628637544348155578648911831344518947322613104291n,
+      bitLength: 254,
+      mask: 28948022309329048855892746252171976963317496166410141009864396001978282409983n,
+      pOp1: 85072,
+      pOp2: 85104,
+      pOp3: 85136,
+      zero: [Uint8Array],
+      one: [Uint8Array],
+      negone: [Uint8Array],
+      two: [Uint8Array],
+      n64: 4,
+      n32: 8,
+      nqr: [Uint8Array],
+      shift: [Uint8Array],
+      shiftInv: [Uint8Array],
+      s: 1,
+      w: [Array],
+      batchToMontgomery: [AsyncFunction: batchConvert],
+      batchFromMontgomery: [AsyncFunction: batchConvert]
+    },
+    F2: WasmField2 {
+      tm: [ThreadManager],
+      prefix: 'f2m',
+      F: [WasmField1],
+      type: 'F2',
+      m: 2,
+      n8: 64,
+      n32: 16,
+      n64: 8,
+      pOp1: 85168,
+      pOp2: 85232,
+      pOp3: 85296,
+      zero: [Uint8Array],
+      one: [Uint8Array],
+      negone: [Uint8Array],
+      two: [Uint8Array]
+    },
+    G1: WasmCurve {
+      tm: [ThreadManager],
+      prefix: 'g1m',
+      F: [WasmField1],
+      pOp1: 85360,
+      pOp2: 85456,
+      pOp3: 85552,
+      zero: [Uint8Array],
+      zeroAffine: [Uint8Array],
+      one: [Uint8Array],
+      g: [Uint8Array],
+      oneAffine: [Uint8Array],
+      gAffine: [Uint8Array],
+      b: [Uint8Array],
+      negone: [Uint8Array],
+      two: [Uint8Array],
+      batchLEMtoC: [AsyncFunction: batchConvert],
+      batchLEMtoU: [AsyncFunction: batchConvert],
+      batchCtoLEM: [AsyncFunction: batchConvert],
+      batchUtoLEM: [AsyncFunction: batchConvert],
+      batchToJacobian: [AsyncFunction: batchConvert],
+      batchToAffine: [AsyncFunction: batchConvert],
+      batchApplyKey: [AsyncFunction (anonymous)],
+      multiExp: [AsyncFunction: multiExpAffine],
+      multiExpAffine: [AsyncFunction: multiExpAffine],
+      fft: [AsyncFunction (anonymous)],
+      ifft: [AsyncFunction (anonymous)],
+      lagrangeEvaluations: [AsyncFunction (anonymous)],
+      fftMix: [AsyncFunction: fftMix],
+      fftJoin: [AsyncFunction: fftJoin],
+      fftFinal: [AsyncFunction: fftFinal]
+    },
+    G2: WasmCurve {
+      tm: [ThreadManager],
+      prefix: 'g2m',
+      F: [WasmField2],
+      pOp1: 85648,
+      pOp2: 85840,
+      pOp3: 86032,
+      zero: [Uint8Array],
+      zeroAffine: [Uint8Array],
+      one: [Uint8Array],
+      g: [Uint8Array],
+      oneAffine: [Uint8Array],
+      gAffine: [Uint8Array],
+      b: [Uint8Array],
+      cofactor: [Uint8Array],
+      negone: [Uint8Array],
+      two: [Uint8Array],
+      batchLEMtoC: [AsyncFunction: batchConvert],
+      batchLEMtoU: [AsyncFunction: batchConvert],
+      batchCtoLEM: [AsyncFunction: batchConvert],
+      batchUtoLEM: [AsyncFunction: batchConvert],
+      batchToJacobian: [AsyncFunction: batchConvert],
+      batchToAffine: [AsyncFunction: batchConvert],
+      batchApplyKey: [AsyncFunction (anonymous)],
+      multiExp: [AsyncFunction: multiExpAffine],
+      multiExpAffine: [AsyncFunction: multiExpAffine],
+      fft: [AsyncFunction (anonymous)],
+      ifft: [AsyncFunction (anonymous)],
+      lagrangeEvaluations: [AsyncFunction (anonymous)],
+      fftMix: [AsyncFunction: fftMix],
+      fftJoin: [AsyncFunction: fftJoin],
+      fftFinal: [AsyncFunction: fftFinal]
+    },
+    F6: WasmField3 {
+      tm: [ThreadManager],
+      prefix: 'f6m',
+      F: [WasmField2],
+      type: 'F3',
+      m: 6,
+      n8: 192,
+      n32: 48,
+      n64: 24,
+      pOp1: 86224,
+      pOp2: 86416,
+      pOp3: 86608,
+      zero: [Uint8Array],
+      one: [Uint8Array],
+      negone: [Uint8Array],
+      two: [Uint8Array]
+    },
+    F12: WasmField2 {
+      tm: [ThreadManager],
+      prefix: 'ftm',
+      F: [WasmField3],
+      type: 'F2',
+      m: 12,
+      n8: 384,
+      n32: 96,
+      n64: 48,
+      pOp1: 86800,
+      pOp2: 87184,
+      pOp3: 87568,
+      zero: [Uint8Array],
+      one: [Uint8Array],
+      negone: [Uint8Array],
+      two: [Uint8Array]
+    },
+    Gt: WasmField2 {
+      tm: [ThreadManager],
+      prefix: 'ftm',
+      F: [WasmField3],
+      type: 'F2',
+      m: 12,
+      n8: 384,
+      n32: 96,
+      n64: 48,
+      pOp1: 86800,
+      pOp2: 87184,
+      pOp3: 87568,
+      zero: [Uint8Array],
+      one: [Uint8Array],
+      negone: [Uint8Array],
+      two: [Uint8Array]
+    },
+    pairing: [Function: pairing],
+    pairingEq: [AsyncFunction: pairingEq],
+    prepareG1: [Function (anonymous)],
+    prepareG2: [Function (anonymous)],
+    millerLoop: [Function (anonymous)],
+    finalExponentiation: [Function (anonymous)],
+    array2buffer: [Function (anonymous)],
+    buffer2array: [Function (anonymous)],
+    terminate: [AsyncFunction (anonymous)]
+  },
+  F: WasmField1 {
+    tm: ThreadManager {
+      actionQueue: [],
+      oldPFree: 0,
+      memory: Memory [WebAssembly.Memory] {},
+      u8: [Uint8Array],
+      u32: [Uint32Array],
+      instance: Instance [WebAssembly.Instance] {},
+      singleThread: false,
+      initalPFree: 84976,
+      pq: 488,
+      pr: 1768,
+      pG1gen: 31432,
+      pG1zero: 31528,
+      pG2gen: 31624,
+      pG2zero: 31816,
+      pOneT: 32008,
+      workers: [Array],
+      pendingDeferreds: [Array],
+      working: [Array],
+      concurrency: 64
+    },
+    prefix: 'frm',
+    p: 21888242871839275222246405745257275088548364400416034343698204186575808495617n,
+    n8: 32,
+    type: 'F1',
+    m: 1,
+    half: 10944121435919637611123202872628637544274182200208017171849102093287904247808n,
+    bitLength: 254,
+    mask: 28948022309329048855892746252171976963317496166410141009864396001978282409983n,
+    pOp1: 84976,
+    pOp2: 85008,
+    pOp3: 85040,
+    zero: Uint8Array(32) [
+      0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0
+    ],
+    one: Uint8Array(32) [
+      251, 255, 255,  79,  28,  52, 150, 172,
+       41, 205,  96, 159, 149, 118, 252,  54,
+       46,  70, 121, 120, 111, 163, 110, 102,
+       47, 223,   7, 154, 193, 119,  10,  14
+    ],
+    negone: Uint8Array(32) [
+        6,   0,  0, 160, 119, 193,  75, 151,
+      103, 163, 88, 218, 178, 113,  55, 241,
+       46,  18,  8,   9,  71, 162, 225,  81,
+      250, 192, 41,  71, 177, 214,  89,  34
+    ],
+    two: Uint8Array(32) [
+      246, 255, 255, 159,  56, 104,  44,  89,
+       83, 154, 193,  62,  43, 237, 248, 109,
+       92, 140, 242, 240, 222,  70, 221, 204,
+       94, 190,  15,  52, 131, 239,  20,  28
+    ],
+    n64: 4,
+    n32: 8,
+    nqr: Uint8Array(32) [
+      230, 255, 255, 159, 249,  14,  13,  27,
+       63, 145,  42, 163, 163, 104, 186, 234,
+      137,   6, 221, 216, 118, 235, 216,  71,
+      195, 187, 245,  32,  85,   8, 208,  21
+    ],
+    shift: Uint8Array(32) [
+      124, 255, 255,  63, 184,  95, 125, 255,
+       24, 245,  97,  60, 161,  58,  60,  69,
+      247, 111,  78,  57, 229,  13, 156, 246,
+      124, 106, 105, 226, 195, 140,  71,  12
+    ],
+    shiftInv: Uint8Array(32) [
+      185,  30, 133,  91,  90,  54,  92,  97,
+      252, 137, 187, 123, 100, 219, 229, 221,
+       42, 234, 128, 149, 144, 139,  95,  84,
+       69, 252,  43, 112,   6, 125,  37,  43
+    ],
+    s: 28,
+    w: [
+      [Uint8Array], [Uint8Array], [Uint8Array],
+      [Uint8Array], [Uint8Array], [Uint8Array],
+      [Uint8Array], [Uint8Array], [Uint8Array],
+      [Uint8Array], [Uint8Array], [Uint8Array],
+      [Uint8Array], [Uint8Array], [Uint8Array],
+      [Uint8Array], [Uint8Array], [Uint8Array],
+      [Uint8Array], [Uint8Array], [Uint8Array],
+      [Uint8Array], [Uint8Array], [Uint8Array],
+      [Uint8Array], [Uint8Array], [Uint8Array],
+      [Uint8Array], [Uint8Array]
+    ],
+    batchToMontgomery: [AsyncFunction: batchConvert],
+    batchFromMontgomery: [AsyncFunction: batchConvert],
+    batchApplyKey: [AsyncFunction (anonymous)],
+    fft: [AsyncFunction (anonymous)],
+    ifft: [AsyncFunction (anonymous)],
+    lagrangeEvaluations: [AsyncFunction (anonymous)],
+    fftMix: [AsyncFunction: fftMix],
+    fftJoin: [AsyncFunction: fftJoin],
+    fftFinal: [AsyncFunction: fftFinal]
+  },
+  nVars: 274433,
+  nOutputs: 0,
+  nPubInputs: 8192,
+  nPrvInputs: 4096,
+  nLabels: 274433,
+  nConstraints: 266240,
+  useCustomGates: false,
+  constraints: [
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    [ [Object], [Object], [Object] ],
+    ... 266140 more items
+  ],
+  customGates: [],
+  customGatesUses: []
+}

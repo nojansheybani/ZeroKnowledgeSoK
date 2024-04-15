@@ -1,0 +1,5 @@
+**/volume/*
+**/*.r1cs
+**/keys/
+**/sok-graphs/*
+**/*.ptau
